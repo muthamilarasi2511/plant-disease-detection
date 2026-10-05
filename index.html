@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Plant Disease Detection</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🌱 Plant Disease Detection</h1>
+
+        <p class="subtitle">
+            Upload a plant leaf image to detect disease
+        </p>
+
+        <form action="/predict"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <label for="image">
+                Select Leaf Image
+            </label>
+
+            <input type="file"
+                   id="image"
+                   name="image"
+                   accept=".jpg,.jpeg,.png,.webp"
+                   required>
+
+            <button type="submit">
+                🔍 Detect Disease
+            </button>
+
+        </form>
+
+        {% if error %}
+
+        <div class="error">
+            {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        {% if prediction %}
+
+        <div class="result">
+
+            <h2>🌿 Prediction Result</h2>
+
+            <p>
+                <strong>Plant:</strong>
+                {{ plant }}
+            </p>
+
+            <p>
+                <strong>Disease:</strong>
+                {{ disease }}
+            </p>
+
+            <p>
+                <strong>Confidence:</strong>
+                {{ confidence }}
+            </p>
+
+            <div class="info">
+
+                <h3>Prevention</h3>
+
+                <p>
+                    Remove affected leaves and maintain
+                    proper spacing between plants.
+                </p>
+
+                <h3>Treatment</h3>
+
+                <p>
+                    Avoid excessive moisture and use
+                    suitable treatment recommended
+                    for the identified disease.
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
